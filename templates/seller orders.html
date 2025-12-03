@@ -1,0 +1,58 @@
+{% extends "sellar dashboard.html" %}
+
+{% block seller-css %}
+<link rel="stylesheet" href="/static/css/seller orders.css">
+{% endblock %}
+
+{% block dasboard-content %}
+
+
+
+
+<div class="order-body">
+    <main class="table" id="customers_table">
+
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Order ID <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Customer <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Location <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Order Date <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Status <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Amount <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    
+                        <tr>
+                            <td> <a href="{% url 'seller_order_detail' order.id %}">{{ order.order_id }}</a> </td>
+                            <td> {{ order.user.username }}</td>
+                            <td> {{ order.shipping_state }} </td>
+                            <td> {{ order.date_ordered }} </td>
+                            <td>
+                                <p class="status {{ order.status }}">{{ order.status }}</p>
+                            </td>
+                            <td> <strong> ₹{{ order.seller_total }} </strong></td>
+                        </tr>
+                    
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No orders yet.</td>
+                        </tr>
+                        {% endfor %}
+
+                   
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- order body ends here -->
+</div>
+
+<script src="/static/js/sort.js"></script>
+
+{% endblock %}

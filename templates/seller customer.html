@@ -1,0 +1,53 @@
+{% extends "sellar dashboard.html" %}
+
+{% block seller-css %}
+<link rel="stylesheet" href="/static/css/seller orders.css">
+{% endblock %}
+
+{% block dasboard-content %}
+
+
+
+
+<div class="order-body">
+    <main class="table" id="customers_table">
+
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> S no. <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Name <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Phone <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> email <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    
+                        <tr>
+                            <td>1</td>
+                            <td>{{customer.username}}</td>
+                            <td>{{customer.phone}}</td>
+                            <td>{{customer.email}}</td>
+                            
+                        </tr>
+                    
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No customers yet.</td>
+                        </tr>
+                        {% endfor %}
+
+                   
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- order body ends here -->
+</div>
+
+
+
+{% endblock %}      

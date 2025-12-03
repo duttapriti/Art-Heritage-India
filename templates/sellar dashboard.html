@@ -1,0 +1,335 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        {{ user.profile.display_name }} dasjboard<br>
+        <a href="{% url 'logout' %}">logout</a>
+        bio : {{ user.profile.bio }} <br>
+        
+
+    </h1>
+
+
+    <h2>Listed Paintings</h2>
+    <ul>
+        {% for painting in listed_paintings %}
+            <li>
+                <h3>{{ painting.title }}</h3>
+                <p>Description: {{ painting.description }}</p>
+                <p>Price: {{ painting.price }}</p>
+                <img src="{{ painting.image.url }}" alt="{{ painting.title }}" style="width: 200px;">
+            </li>
+        {% empty %}
+            <p>No paintings listed yet.</p>
+        {% endfor %}
+    </ul>
+    
+    <h2>Ordered Paintings</h2>
+    <ul>
+        {% for order_item in ordered_items %}
+            <li>
+                <h3>{{ order_item.painting.title }}</h3>
+                <p>Quantity: {{ order_item.quantity }}</p>
+                <p>Ordered By: {{ order_item.order.user.username }}</p>
+                <p>Shipping Address: {{ order_item.order.shipping_address }}</p>
+                <p>Order Date: {{ order_item.order.date_ordered }}</p>
+            </li>
+        {% empty %}
+            <p>No paintings ordered yet.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="/static/css/seller-dashboard.css">
+    
+    {% block seller-css %}
+    {% endblock %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="full">
+        <div class="menu">
+            <div class="logo">
+
+            </div>
+
+            <div class="menu-item">
+                <a href="{% url 'seller_dashboard' %}">dashboard</a>
+                <a href="{% url 'seller_product' %}">Products</a>
+                <a href="{% url 'seller_orders' %}">Orders</a>
+                <a href="{% url 'profile_update' %}">Settings</a>
+            </div>
+        </div>
+        <div class="content">
+
+            <div class="acc-sec">
+                <div>
+                    <a href="{% url 'profile_update' %}"><button>Edit Profile</button></a>
+                <a href="{% url 'logout' %}"><button>Logout</button></a>
+                </div>
+
+
+                <div class="sec">
+                    <div class="acc-text">
+                        <h2> {{ user.username }} </h2>
+                        <p>@{{ user.profile.display_name }}</p>
+                    </div>
+                    <div class="dp" >
+                        <img src="/media/{{ user.profile.profile_picture }}" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+ {% block dasboard-content %}
+
+
+           <div class="analytics">
+            <div>
+                <h2>{{listing_no}} <br> Listings</h2>
+            </div>
+
+            <div>
+                <h2>10 <br> Sales</h2>
+            </div>
+
+            <div>
+                <h2>{{orders_no}} <br> Orders</h2>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="lineChart" style="width: 100%; height: 100%;"></canvas>
+        </div>
+
+        <div class="notifications">
+            <div class="listing-container">
+                <h2>Listings</h2>
+                <div class="listings">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for painting in listed_paintings %}
+
+                            <tr>
+                                <td>{{ painting.id}}</td>
+                                <td>{{ painting.title}}</td>
+                                <td>{{ painting.category}}</td>
+                                <td>₹{{ painting.price}}</td>
+                            </tr>
+                            {% empty %}
+                            <td colspan="4">No Listings yet.</td>
+                            {% endfor%}
+                           
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+
+                <a href="{% url 'seller_product' %}"><button>Manage</button></a>
+            </div>
+
+
+            <div class="order-container">
+                <h2>Recent Orders</h2>
+                <div class="orders">
+
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Customer</th>
+                                <th>Location</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+
+                            <tr>
+                                <td>{{ order.id}}</td>
+                                <td>{{ order.user.username }}</td>
+                                <td>{{ order.shipping_state }}</td>
+                                <td>₹{{ order.get_cart_total }}</td>
+                            </tr>
+                            {% empty %}
+                            <td colspan="4">No orders yet.</td>
+                            {% endfor%}
+                            
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <a href="{% url 'seller_orders' %}"><button>Manage</button></a>
+            </div>
+
+
+        </div>
+
+
+
+ {% endblock %}
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        const lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [1500, 2000, 3000, 2500, 4000],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    title: { display: true, text: 'Monthly Sales' }
+                }
+            }
+        });
+
+
+
+
+    </script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Get data passed from Django view
+    const chartLabels = JSON.parse('{{ chart_labels|safe }}');
+    const chartData = JSON.parse('{{ chart_data|safe }}');
+
+    // Get the canvas context
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+    // Create the chart
+    const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: chartLabels, // e.g. ["January", "February", ...]
+            datasets: [{
+                label: 'Monthly Revenue (₹)',
+                data: chartData, // e.g. [1500, 2000, 3500, ...]
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2,
+                tension: 0.3,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Monthly Revenue for Your Paintings',
+                    font: {
+                        size: 18
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ` ₹${context.parsed.y}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Revenue (₹)',
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Month',
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+</body>
+
+</html>
+
+
+

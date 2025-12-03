@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/searches.css">
+{% endblock %}
+
+{% block content %}
+<!-- <center>
+    <div class="container">
+
+        {% if results %}
+            {% for painting in results %}
+               
+                 
+                <div class="card">
+                    <img src="/media/{{ painting.image }}" alt="{{ painting.title }}">
+                    <div class="rating">
+                        <p>{{ painting.rating }} | <i class="fa-solid fa-star"></i></p>
+                    </div>
+                    <div class="card-content">
+                        <p class="title">{{ painting.title }}</p>
+                        <p class="price">{{ painting.category }}</p>
+                        <p class="type"><a href="{% url 'product' pk=painting.id %}">₹{{ painting.price }}</a></p>
+                    </div>
+                </div>
+
+            {% endfor %}
+        
+        {% else %}
+        <p>No paintings found matching your query.</p>
+        {% endif %}
+
+</div>
+</center> -->
+
+
+
+
+<div class="search-container">
+    {% if results %}
+    {% for painting in results %}
+    
+    <div class="card">
+        <a href="" class="image-container">
+            <img src="/media/{{ painting.image }}" alt="" loading="lazy">
+        </a>
+        <div class="text">
+
+            <a href="#"><b>{{ painting.title }}</b></a>
+            <a href="#">{{ painting.category }}</a>
+            <p>₹{{ painting.price }}</p>
+
+        </div>
+
+        <div class="hover-sec">
+            <a href="{% url 'product' pk=painting.id %}">
+                <button>View Product</button>
+            </a>
+
+            <a href="#">
+                <button id="wish">Wishlist</button>
+            </a>
+
+        </div>
+    </div>
+
+    {% endfor %}
+    {% else %}
+        <p>No paintings found matching your query.</p>
+    {% endif %}
+ 
+
+</div>
+{% endblock %}

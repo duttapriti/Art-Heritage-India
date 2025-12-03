@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+
+{% block seller-css %}
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/forms@0.5.10/src/index.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+
+ <!-- <form  class="mt-8 grid grid-cols-6 gap-6" method="POST">
+  {% csrf_token %}
+  <div class="col-span-6 ">
+    <label for="FirstName" class="block text-sm font-medium text-black-700">
+      User Name
+    </label>
+
+    <input
+      type="text"
+      id="FirstName"
+      name="username"
+      class="mt-1 w-full rounded-md border-black-200 bg-white text-sm text-black-700 shadow-xs"
+    />
+  </div>
+
+
+
+  <div class="col-span-6">
+    <label for="Email" class="block text-sm font-medium text-black-700"> Email </label>
+
+    <input
+      type="email"
+      id="Email"
+      name="email"
+      class="mt-1 w-full rounded-md border-black-200 bg-white text-sm text-black-700 shadow-xs"
+    />
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <label for="Password" class="block text-sm font-medium text-black-700"> Password </label>
+
+    <input
+      type="password"
+      id="Password"
+      name="password"
+      class="mt-1 w-full rounded-md border-black-200 bg-white text-sm text-black-700 shadow-xs"
+    />
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <label for="PasswordConfirmation" class="block text-sm font-medium text-black-700">
+      Password Confirmation
+    </label>
+
+    <input
+      type="password"
+      id="PasswordConfirmation"
+      name="confirm_password"
+      class="mt-1 w-full rounded-md border-black-200 bg-white text-sm text-black-700 shadow-xs"
+    />
+  </div>
+
+  <div class="col-span-6">
+    <label for="MarketingAccept" class="flex gap-4">
+      <input
+        type="checkbox"
+        id="MarketingAccept"
+        name="marketing_accept"
+        class="size-5 rounded-md border-black-200 bg-white shadow-xs"
+      />
+
+      <span class="text-sm text-black-700">
+        I want to receive emails about events, product updates and company announcements.
+      </span>
+    </label>
+  </div>
+
+  <div class="col-span-6">
+    <p class="text-sm text-black-500">
+      By creating an account, you agree to our
+      <a href="#" class="text-black-700 underline"> terms and conditions </a>
+      and
+      <a href="#" class="text-black-700 underline">privacy policy</a>.
+    </p>
+  </div>
+
+  <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+    <button type="submit"
+      class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:ring-3 focus:outline-hidden"
+    >
+      Create an account
+    </button>
+
+    <p class="mt-4 text-sm text-black-500 sm:mt-0">
+      Already have an account?
+      <a href="#" class="text-black-700 underline">Log in</a>.
+    </p>
+  </div>
+</form>  -->
+
+<section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-black-800 mb-20">
+  <h2 class="text-lg font-semibold text-black-700 capitalize dark:text-white">Account settings</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+      <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+          <div>
+              <label class="text-black-700 dark:text-black-200" for="username">Username</label>
+              <input name="username" id="username" type="text" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+          </div>
+
+          <div>
+              <label class="text-black-700 dark:text-black-200" for="emailAddress">Email Address</label>
+              <input name="email" id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+          </div>
+
+          <div>
+              <label class="text-black-700 dark:text-black-200" for="password">Password</label>
+              <input name="password" id="password" type="password" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+          </div>
+
+          <div>
+              <label class="text-black-700 dark:text-black-200" for="passwordConfirmation">Password Confirmation</label>
+              <input  name="confirm_password" id="passwordConfirmation" type="password" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+          </div>
+      </div>
+
+      <div class="flex justify-end mt-6">
+          <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-black-600 focus:outline-none focus:bg-black-600">Save</button>
+      </div>
+  </form>
+</section> 
+
+
+
+  {% endblock %}
+
+
+

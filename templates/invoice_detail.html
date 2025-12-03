@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice for Order #{{ order.order_id }}</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 40px;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 15px;
+        }
+        .invoice-header h1 {
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        .invoice-details, .customer-info, .shipping-info {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .invoice-details p, .customer-info p, .shipping-info p {
+            margin: 0;
+        }
+        .invoice-details strong, .customer-info strong, .shipping-info strong {
+            color: #555;
+            display: inline-block;
+            width: 120px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .invoice-total {
+            text-align: right;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #dc3545;
+        }
+        .invoice-footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        /* Styles for the print button container */
+        .print-button-container {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .print-button {
+            background-color: #28a745; /* Green color */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .print-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        /* Media query to hide print button when actually printing */
+        @media print {
+            .print-button-container {
+                display: none; /* Hide the button when the print dialog is open */
+            }
+            body {
+                margin: 0;
+                background-color: #fff; /* Ensure white background for print */
+                box-shadow: none;
+            }
+            .invoice-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>INVOICE</h1>
+            <p><strong>Order ID:</strong> #{{ order.order_id }}</p>
+            <p><strong>Date:</strong> {{ order.date_ordered|date:"F d, Y" }}</p>
+        </div>
+
+        <div class="customer-info">
+            <h3>Billed To:</h3>
+            <p><strong>Name:</strong> {{ order.user.username }}</p>
+            <p><strong>Email:</strong> {{ order.user.email }}</p>
+        </div>
+
+        <div class="shipping-info">
+            <h3>Shipping Address:</h3>
+            <p><strong>Address:</strong> {{ order.shipping_address }}</p>
+            <p><strong>City:</strong> {{ order.shipping_city }}</p>
+            <p><strong>State:</strong> {{ order.shipping_state }}</p>
+            <p><strong>Zip Code:</strong> {{ order.shipping_zip }}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th class="text-right">Unit Price</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order_items %}
+                    <tr>
+                        <td>{{ item.painting.title }}</td>
+                        <td class="text-right">₹{{ item.painting.price|floatformat:2 }}</td>
+                        <td class="text-right">{{ item.quantity }}</td>
+                        <td class="text-right">₹{{ item.get_total|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="invoice-total">
+            Grand Total: ₹{{ order.get_cart_total|floatformat:2 }}
+        </div>
+
+        <div class="invoice-footer">
+            <p>Thank you for your purchase!</p>
+            <p>This is an electronically generated invoice and does not require a signature.</p>
+        </div>
+
+        {# NEW: Print Button Section #}
+        <div class="print-button-container">
+            <button class="print-button" onclick="window.print()">Print Invoice</button>
+        </div>
+    </div>
+</body>
+</html>

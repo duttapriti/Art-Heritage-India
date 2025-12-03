@@ -1,0 +1,100 @@
+
+
+{% extends "base.html" %}
+
+
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/user-dashboard.css">
+
+{% endblock %}
+
+{% block content %}
+
+
+<!-- <h1> welcome, {{ user.username }} </h1>
+
+<a href="{% url 'logout' %}">logout</a>
+<a href="{% url 'view_cart' %}">cart</a>
+<a href="{% url 'view_orders' %}">My Orders</a> -->
+
+
+
+
+  
+  <div class="dashboard">
+    <h1>welcome, {{ user.username }}</h1>
+    
+    <!-- Orders -->
+    <div class="card" onclick="window.location.href='{% url 'view_orders' %}';">
+        <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+        <h2>Orders</h2>
+        <ul>
+            <li>View your order history</li>
+            <li>Track current orders</li>
+        </ul>
+    </div>
+
+    <!-- Cards -->
+    <div class="card" onclick="window.location.href='{% url 'view_cart' %}';">
+        <div class="icon"><i class="fa-solid fa-basket-shopping"></i></div>
+        <h2>Your Cart</h2>
+        <ul>
+            <li>Manage your cart</li>
+            <li>Add or remove cartitems</li>
+        </ul>
+    </div>
+
+    <!-- Your Data -->
+    <div class="card" onclick="window.location.href='{% url 'profile_update' %}';">
+        <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
+        <h2>Edit Your Data</h2>
+        <ul>
+            <li>Edit personal information</li>
+            <li>Manage privacy settings</li>
+        </ul>
+    </div>
+
+    <!-- Wishlist -->
+    <div class="card" onclick="window.location.href='#';">
+        <div class="icon"><i class="fas fa-heart"></i></div>
+        <h2>Wishlist</h2>
+        <ul>
+            <li>View saved items</li>
+            <li>Add or remove items</li>
+        </ul>
+    </div>
+
+    <!-- Address -->
+    <div class="card" onclick="window.location.href='#';">
+        <div class="icon"><i class="fas fa-user"></i></div>
+        <h2>Your Details</h2>
+        <ul>
+            <li>View Your Login History</li>
+            <li>And Other Details</li>
+        </ul>
+    </div>
+
+    <!-- Log Out -->
+    <div class="card" onclick="window.location.href='{% url 'logout'%}';">
+        <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
+        <h2>Log Out</h2>
+        <ul>
+            <li>Sign out of your account</li>
+        </ul>
+    </div>
+
+    <!-- Customer Service -->
+    <div class="card" onclick="window.location.href='{% url 'contact' %}';">
+        <div class="icon"><i class="fas fa-headset"></i></div>
+        <h2>Customer Service</h2>
+        <ul>
+            <li>Contact support</li>
+            <li>View FAQs</li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

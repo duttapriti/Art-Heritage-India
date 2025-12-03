@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/contact.css">
+
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <div class="container">
+      <!-- <img src="img/shape.png" class="square" alt="" /> -->
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Contact Us</h3>
+          <p class="text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+            dolorum adipisci recusandae praesentium dicta.
+          </p>
+
+          <div class="info">
+            <div class="information">
+             
+              <p><b>Dabgram , siliguri , XXXXXX</b></p>
+            </div>
+            <div class="information">
+             
+              <p><b>lorem@ipsum.com</b></p>
+            </div>
+            <div class="information">
+              
+              <p><b>123-456-789</b></p>
+            </div>
+          </div>
+
+          <div class="social-media">
+            <p>Get in touch with us :</p>
+            <div class="social-icons">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form  method="post" autocomplete="off" style="  padding: 2.3rem 2.2rem;
+          z-index: 10;
+          overflow: hidden;
+          position: relative;">
+            {% csrf_token %}
+            <h3 class="title">Get Quote</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" />
+              <label for="">Username</label>
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" />
+              <label for="">Email</label>
+              <span>Email</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" />
+              <label for="">Phone</label>
+              <span>Phone</span>
+            </div>
+            <div class="input-container textarea">
+              <textarea name="message" class="input"></textarea>
+              <label for="">Message</label>
+              <span>Message</span>
+            </div>
+            <input type="submit" value="Send" class="btn"  style=" color: white; border: 3px solid white;"/>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/contact.js"></script>
+  </body>
+
+{% endblock %}

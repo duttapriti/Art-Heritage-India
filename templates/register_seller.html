@@ -1,0 +1,80 @@
+
+
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/home.css">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'register_seller' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <input type="text" name="display_name" placeholder="Display Name (Unique)" required>
+        <button type="submit">Register as Seller</button>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </form>
+</body>
+</html> -->
+
+<section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-black-800 mb-20">
+    <h2 class="text-lg font-semibold text-black-700 capitalize dark:text-white">Account settings</h2>
+  
+    <form method="POST" enctype="multipart/form-data" action="{% url 'register_seller' %}">
+      {% csrf_token %}
+        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="username">Username</label>
+                <input name="username" id="username" type="text" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+  
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="emailAddress">Email Address</label>
+                <input name="email" id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+  
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="password">Password</label>
+                <input name="password" id="password" type="password" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+  
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="passwordConfirmation">Password Confirmation</label>
+                <input  name="confirm_password" id="passwordConfirmation" type="password" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="passwordConfirmation">Display name</label>
+                <input  name="display_name" id="display_name" type="text" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+
+            <div>
+                <label class="text-black-700 dark:text-black-200" for="photo">Photo</label>
+                <input  name="photo" id="photo" type="file" class="block w-full px-4 py-2 mt-2 text-black-700 bg-white border border-black-200 rounded-md dark:bg-black-800 dark:text-black-300 dark:border-black-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+        </div>
+  
+        <div class="flex justify-end mt-6">
+            <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-black-600 focus:outline-none focus:bg-black-600">Save</button>
+        </div>
+    </form>
+  </section> 
+
+{% endblock %}

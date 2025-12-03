@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+
+{% block page_css %}
+<style>
+    body {
+
+        text-align: center;
+        color: #000;
+    }
+
+
+
+    button:hover {
+        background-color: #333;
+    }
+
+
+    @media (max-width: 768px) {
+        .confirmation-box {
+            width: 90%;
+            padding: 30px;
+            margin: 50px auto;
+        }
+
+        .confirmation-box h2 {
+            font-size: 28px;
+        }
+
+        .confirmation-box p {
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+        }
+
+        .footer-section {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<!-- <h1>Order Confirmation</h1>
+
+<p>Order ID: {{ order.id }}</p>
+<p>Date: {{ order.date_ordered }}</p>
+
+<h3>Shipping Address:</h3>
+<p>{{ order.shipping_address }}</p>
+<p>{{ order.shipping_city }}, {{ order.shipping_state }} - {{ order.shipping_zip }}</p>
+
+<h3>Order Items:</h3>
+<ul>
+    {% for item in order_items %}
+    <li>{{ item.painting.title }} - ${{ item.painting.price }} x {{ item.quantity }} = ${{ item.get_total }}</li>
+    {% endfor %}
+</ul>
+
+<p>Total: ${{ order.get_cart_total }}</p>
+<a href="{% url 'home' %}">Go to Profile</a> -->
+
+
+<main>
+    <div class="confirmation-box" style="  background-color: #FFF;
+                margin: 100px auto;
+                padding: 50px;
+                width: 60%;
+                border: 2px solid #E60023;
+                border-radius: 5px;">
+        <h2 style="        color: #000;
+        font-size: 32px;">THANK YOU!</h2>
+        <p style="        color: #333;
+        font-size: 18px;">We are getting started on your order right away, in the meantime explore the latest arts,sulpture and get inspired by new things, just head
+            over to
+            <hr> <a href="{% url 'home' %}" style="color: #E60023;
+        text-decoration: none;">
+                <h3 style="padding: 10px 0px;">ART HERITAGE INDIA <h3>
+            </a>
+            <hr>.
+        </p>
+        <a href="{% url 'view_orders' %}"><button style="        background-color: #000;
+            color: #FFF;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 10px;">VIEW ORDERS</button></a>
+        <p><a href="{% url 'profile' %}">return to profile</a></p>
+    </div>
+</main>
+
+{% endblock %}

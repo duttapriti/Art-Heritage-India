@@ -1,0 +1,89 @@
+{% extends "sellar dashboard.html" %}
+
+{% block dasboard-content %}
+
+<div class="p-section">
+  <h2>Your Paintings</h2>
+  <div class="search">
+    <form method="GET" action="#">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" name="q" placeholder="Search for paintings...">
+    </form>
+  </div>
+
+  <div class="add__painting">
+    <label for="add-painting" class="add__painting-btn" title="add__painting">Add Product</label>
+    <input type="checkbox" id="add-painting" hidden>
+    
+    <div class="add-painting-form" style="display: none;">
+      <div class="form-container" id="formContainer">
+        <label for="add-painting" class="close-btn" style="position: absolute; top: 20px; right: 25px; font-size: 22px; cursor: pointer;">X</label>
+        
+        <h2 style="text-align: center; color: #ff5757; font-family: 'Montserrat', sans-serif;">Add Product</h2>
+        <form method="POST" enctype="multipart/form-data" style="padding: 20px;">
+          {% csrf_token %}
+
+          <label for="title" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px;">Title:</label>
+          <input type="text" name="title" id="title" required style="width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #bbb;">
+
+          <label for="description" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px; margin-top: 20px;">Description:</label>
+          <textarea name="description" id="description" rows="4" required style="width: 100%; padding: 12px; border: 1px solid #bbb;"></textarea>
+
+          <label for="category" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px; margin-top: 20px;">Category:</label>
+          <select name="category" id="category" required style="width: 100%; padding: 12px; border: 1px solid #bbb;">
+            {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+
+          <!-- <label for="image" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px; margin-top: 20px;">Image:</label>
+          <input type="file" name="image" id="image" required style="margin-top: 10px; font-size: 14px;"> -->
+          <label for="image" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px; margin-top: 20px;">Image:</label>
+<input type="file" name="image" id="image" required
+       style="display: block; width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #bbb; font-size: 14px; box-sizing: border-box;">
+
+
+          <label for="price" style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 13px; margin-top: 20px;">Price:</label>
+          <input type="number" name="price" id="price" min="0" step="0.01" required style="width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #bbb;">
+
+
+
+          <button type="submit" style="width: 100%; padding: 14px; background-color: #ff5757; border: 2px solid #e45757; color: white; font-size: 15px; font-weight: 600; margin-top: 30px; cursor: pointer; text-transform: uppercase;">Add Painting</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="products">
+  {% for painting in listed_paintings %}
+    <div class="product-card">
+      <div class="img-part">
+        <img src="{{ painting.image.url }}" alt="">
+      </div>
+      <div class="text-part">
+        <h4>{{ painting.title }}</h4>
+        <h5>{{ painting.category }}</h5>
+        <p>₹{{ painting.price }}</p>
+        <div class="buttons">
+          <a href="{% url 'product' pk=painting.id %}"><button class="v">view</button></a>
+          <a href="{% url 'delete_painting' painting.id %}"><button class="r">remove</button></a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  // Toggle form visibility based on checkbox
+  const formToggleCheckbox = document.getElementById('add-painting');
+  const formWrapper = document.querySelector('.add-painting-form');
+
+  formToggleCheckbox.addEventListener('change', () => {
+    formWrapper.style.display = formToggleCheckbox.checked ? 'block' : 'none';
+  });
+</script>
+
+{% endblock %}
+
+

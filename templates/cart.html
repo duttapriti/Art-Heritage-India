@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/static/css/cart.css">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="mastercontainer">
+
+
+  <div class="cart-text">
+    <h2>Shopping Cart</h2>
+  </div>
+  
+  
+  <div class="container">
+    {% if cart_items %}
+      {% for item in cart_items %}
+  
+  
+    <div class="item-box1">
+      <div class="img1"><img src="/media/{{item.painting.image}}" alt="" srcset=""></div>
+  
+      <div class="text">
+          <div class="item-name">
+              <h6>{{ item.painting.title }}</h6>
+          </div>
+          <div class="item-type">
+              <h6>PATTACHITRAM</h6>
+          </div>
+      </div>
+  
+      <div class="price">
+          <h6>₹{{ item.painting.price }}</h6>
+      </div>
+  
+      <div class="item-btns">
+          <button class="available">
+            <a href="{% url 'product' pk=item.painting.id %}">VIEW</a>
+          </button>
+          <a style="color: white;" href="{% url 'direct_buy' item.painting.id %}">
+            <button class="buy-now">BUY NOW</button>
+          </a>
+          
+      </div>
+  
+      <!-- <input type="checkbox" name="tick" class="tick"> -->
+  
+      <a href="{% url 'remove_from_cart' item.id %}">
+        <i class="fa-solid fa-xmark" id="cross"></i>
+      </a>
+  
+  </div>
+  
+      {% endfor %}
+    
+  
+  </div>
+  
+  <a href="{% url 'clearall' %}">
+    <button class="clear-all">Clear All</button></i>
+  </a>
+  
+  
+    
+    <div class="container2">
+  
+      <div class="checkout">
+          <h2>Cart Total</h2>
+  
+          <div class="checkout-container">
+             
+              <div class="name">
+                  <h5>subtotal:</h5>
+                  <h5>shipping:</h5>
+                  <h5>Total:</h5>
+              </div>
+  
+  
+              <div class="cost">
+                  <h5>{{ total_price }}</h5>
+                  <h5>free</h5>
+                  <h5>{{ total_price }}</h5>
+              </div>
+          </div>
+  
+          <button class="checkout-button"><a href="{% url 'checkout' %}" style="color: white;">CHECKOUT</a></button>
+  
+      </div>
+  
+      {% else %}
+       <p>Your cart is empty.</p>
+      {% endif %}
+  
+      <div class="recommended">
+        <h2>Pair with your cart</h2>
+        <div class="img"><img src="/static/images/painting1.jpg" alt="" srcset=""></div>
+        <div class="details">
+          <h5>painting name</h5>
+          <h6>painting type</h6>
+          <p>painting description</p>
+          <h4>₹200</h4>
+        </div>
+  
+        <button class="add-to-cart">Add to cart</button>
+      </div>
+  
+  </div>
+
+</div>
+{% endblock %}

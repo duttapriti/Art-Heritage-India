@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/update.css' %}">
+
+<div class="form-container">
+    <h2>Update Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="update-form">
+        {% csrf_token %}
+
+        <h3>Update User Info</h3>
+        <div class="form-group">
+            {{ user_form.as_p }}
+        </div>
+
+        {% if has_profile %}
+            <h3>Update Profile Info</h3>
+            <div class="form-group">
+                {{ profile_form.as_p }}
+            </div>
+        {% endif %}
+
+        <button type="submit" name="update_user" class="btn btn-primary">Update Profile</button>
+    </form>
+
+    <h3>Change Password</h3>
+    <form method="POST" class="update-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ password_form.as_p }}
+        </div>
+        <button type="submit" name="update_password" class="btn btn-danger">Change Password</button>
+    </form>
+</div>
+{% endblock %}

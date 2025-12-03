@@ -1,0 +1,189 @@
+{% extends "sellar dashboard.html" %}
+
+{% block seller-css %}
+<link rel="stylesheet" href="/static/css/seller orders.css">
+{% endblock %}
+
+{% block dasboard-content %}
+
+<!-- <h2>Order Details - {{ order.order_id }}</h2>
+
+<p>Customer: {{ order.user.username }}</p>
+<p>Date Ordered: {{ order.date_ordered }}</p>
+<p>Status: {{ order.status }}</p>
+
+<h3>Ordered Paintings</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Painting</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order_items %}
+        <tr>
+            <td>{{ item.painting.title }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.painting.price }}</td>
+            <td>₹{{ item.get_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><strong>Total Amount:</strong> ₹{{ order.get_cart_total }}</p> -->
+
+
+
+
+
+
+
+<div class="order-details-container">
+
+    <div class="order_details">
+
+        <div class="order-id">
+            <h2>Order ID - {{ order.order_id }} </h2>
+            <P>Ordered on {{ order.date_ordered }} </P>
+        </div>
+
+        <div class="order-items-list">
+            <h2>Order Items</h2>
+
+            {% for item in order_items %}
+            
+            <div class="order_item">
+                <img src="{{ item.painting.image.url }}" alt="">
+                <div class="order_item_text">
+                    <h3>{{ item.painting.title }}</h3>
+                    <p>{{ item.painting.category }}</p>
+                </div>
+                <p>₹{{ item.painting.price }}</p>
+                <a href="{% url 'product' pk=item.painting.id %}"><button>view</button></a>
+                
+            </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="order_summary_container">
+            <h2>Order Summary</h2>
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>₹{{ seller_total }}</td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td>₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>₹{{ seller_total }}</td>
+                </tr>
+            </table>
+
+            <div class="action_btns">
+                <p>Review your orders at a glance in order summary.</p>
+                <!-- <a href="#">Cancel</a> -->
+                {% if order.status == "Placed" %}
+                <a href="{% url 'mark_as_shipped' order.id %}">Shipped</a>
+                {% elif order.status == "Shipped" %}
+                <a href="{% url 'mark_as_delivered' order.id %}">Delivered</a>
+
+                {% endif %}
+            </div>
+
+        </div>
+
+        
+    </div>
+
+    <div class="custormer_details_container">
+    
+        <div class="customer_detail">
+            <h2>Customer</h2>
+            <div class="light-text">
+                <i class="fa-regular fa-user"></i>
+                <p>{{ order.user.username }}</p>
+            </div>
+    
+            <div class="light-text">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <p>1 item</p>
+            </div>
+    
+            <div class="light-text">
+                <i class="fa-regular fa-envelope"></i>
+                <p>{{ order.user.email }}</p>
+            </div>
+    
+            <div class="light-text">
+                <i class="fa-solid fa-phone"></i>
+                <p>545765567</p>
+            </div>
+    
+        </div>
+    
+        
+        <div class="address_container">
+
+            <h2>
+                Shipping Address
+            </h2>
+             
+            <div class="light-text">
+                <i class="fa-regular fa-user"></i>
+                <p>{{ order.user.username }}</p>
+            </div>
+
+
+            <div class="light-text">
+                <i class="fa-solid fa-phone"></i>
+                <p>545765567</p>
+            </div>
+
+
+            <div class="light-text">
+                <i class="fa-solid fa-house"></i>
+                <p>{{ order.shipping_address }}<br>
+            </div>
+
+            <div class="light-text">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>{{ order.shipping_city }}<br>
+            </div>
+
+            <div class="light-text">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>{{ order.shipping_state }} 745839 <br>
+            </div>
+
+            <div class="light-text">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>INDIA<br>
+            </div>
+
+
+        </div>
+    
+    </div>
+
+    
+
+
+    <!-- order details container end here -->
+</div>
+
+
+{% endblock %}
+
+
