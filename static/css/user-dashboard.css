@@ -1,0 +1,83 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+.dashboard h1 {
+    width: 100%;
+    text-align: center;
+    color: #333;
+}
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 calc(33.333% - 40px);
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.card h2 {
+    color: #555;
+    margin-top: 0;
+}
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+.card ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.card ul li:last-child {
+    border-bottom: none;
+}
+.card ul li a {
+    text-decoration: none;
+    color: #0073e6;
+}
+.card ul li a:hover {
+    text-decoration: underline;
+}
+.icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Different colors for each card */
+.card:nth-child(1) { background-color: #e3f2fd; } /* Orders */
+.card:nth-child(2) { background-color: #fff3e0; } /* Cards */
+.card:nth-child(3) { background-color: #f1f8e9; } /* Your Data */
+.card:nth-child(4) { background-color: #fce4ec; } /* Wishlist */
+.card:nth-child(5) { background-color: #e0f7fa; } /* Address */
+.card:nth-child(6) { background-color: #ffebee; } /* Log Out */
+.card:nth-child(7) { background-color: #f3e5f5; } /* Customer Service */
+
+/* Icon colors */
+.card:nth-child(1) .icon { color: #2196f3; } /* Orders */
+.card:nth-child(2) .icon { color: #ff9800; } /* Cards */
+.card:nth-child(3) .icon { color: #4caf50; } /* Your Data */
+.card:nth-child(4) .icon { color: #e91e63; } /* Wishlist */
+.card:nth-child(5) .icon { color: #00bcd4; } /* Address */
+.card:nth-child(6) .icon { color: #f44336; } /* Log Out */
+.card:nth-child(7) .icon { color: #9c27b0; } /* Customer Service */
